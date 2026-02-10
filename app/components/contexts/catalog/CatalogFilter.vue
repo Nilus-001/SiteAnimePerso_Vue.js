@@ -1,6 +1,6 @@
 <template>
   <div v-for="{ categories, index } in filterSetup" :key="`category-index-${index}`">
-    <h2>{{ categories }}</h2>
+    <h2>2cecec {{ categories }}</h2>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ const {
   filterOptions,
 } = useCatalogfilter();
 
-const filterSetup = filterOptions();
+// const filterSetup = filterOptions();
 </script>
 
 <style lang="scss" scoped></style>

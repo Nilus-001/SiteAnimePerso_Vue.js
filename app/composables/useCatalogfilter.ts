@@ -563,7 +563,7 @@
     studio: "Drive",
   },
 ])
-    const DataFiltered = ref(Data)
+  const DataFiltered = ref(Data.value)
 
 export const useCatalogfilter = () => {
 

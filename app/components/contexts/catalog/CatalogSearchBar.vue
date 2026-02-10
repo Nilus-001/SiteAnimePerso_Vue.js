@@ -5,12 +5,10 @@
 <script setup>
 import { useCatalogfilter } from "~/composables/useCatalogfilter.ts";
 
-const { Data, textFilter, DataFiltered } = useCatalogfilter();
-
-console.log(Data.value);
+const { Data, DataFiltered } = useCatalogfilter();
 
 const search = (values) => {
-  DataFiltered.value = Data.value.filter((p) =>
+  DataFiltered.value = DataFiltered.value.filter((p) =>
     p.name.toLowerCase().includes(values.search.toLowerCase())
   );
 };

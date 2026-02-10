@@ -13,7 +13,7 @@
 <script setup>
 import { useCatalogfilter } from "~/composables/useCatalogfilter.ts";
 
-const { Data, textFilter, contentfilter, DataFiltered } = useCatalogfilter();
+const { DataFiltered } = useCatalogfilter();
 </script>
 
 <style lang="scss" scoped></style>
