@@ -1,6 +1,6 @@
 
     const textFilter = ref("")
-    const contentfilter = ref({})
+    const contentfilter = reactive({genre:[], status:[],})
     const Data = ref([{
     id: 51,
     name: "86: Eighty Six",
@@ -568,35 +568,78 @@
 export const useCatalogfilter = () => {
 
     const filterOptions = () => {
-        const filterO = {
-            genre:[],
-            status:[],
-        }
-        Data.value.forEach(ele => {
-            ele.genre.forEach(e => {
-                 if(!filterO.genre.includes(e)){
-                    filterO.genre.push(e)
-            }
-            })
+      const filterO ={ genre:[], status:[],}
+      Data.value.forEach(ele => {
 
-            if(!filterO.status.includes(ele.status.status)){
-                filterO.status.push(ele.status.status)
-            }
-            
+        ele.genre.forEach(e => {
+          if(!filterO.genre.includes(e)){
+                filterO.genre.push(e)
+          }
+        })
         
-        });
+        if(!filterO.status.includes(ele.status.status)){
+            filterO.status.push(ele.status.status)
+        }
         
-        return filterO;
+          
+      
+      });
+    
+      return filterO;
 
         
     }
 
+  const filterByFilter = (data) => {
+
+    DataFiltered.value = Data.value.filter((anime) => {
+
+      for (const key in data) {
+        const values = data[key];
+        let isValid = false
+
+        if(values.length === 0){
+          continue;
+        }
+        if(key === "status"){
+          isValid = values.includes(anime[key][key])
+        }
+        else if(Array.isArray(values)){
+          isValid = values.every(g => anime[key].includes(g));
+        }
+        
+        else{
+          isValid = values.includes(anime[key])
+        }
+
+        if(!isValid){
+          return false
+        }
+      }
+      
+      return true
+    })
+  };
+
+    
+    const filterByName = (name) => {
+        DataFiltered.value = Data.value.filter((p) =>
+            p.name.toLowerCase().includes(name.toLowerCase())
+        );
+    }
+    const resetFilter = () => {
+        DataFiltered.value = Data.value;
+    }
+
 
     return {
-        textFilter,
+        textFilter ,
         contentfilter,
         Data,
         DataFiltered,
         filterOptions,
+        filterByFilter,
+        filterByName,
+        resetFilter,
     }
 }
